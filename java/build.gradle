@@ -1,0 +1,92 @@
+apply plugin: 'java'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+
+
+//包配置信息
+ext {
+    version = "1.0.3"
+    artifactId = "wxpusher-client"
+    projectUrl = "https://github.com/zjiecode/wxpusher-client.git"
+    description = "微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息，详情请看：http://wxpusher.dingliqc.com/。"
+    user = 'zjiecode'
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+    }
+}
+
+repositories {
+    jcenter()
+    mavenCentral()
+}
+dependencies {
+    compile 'com.alibaba:fastjson:1.2.47'
+    testCompile 'junit:junit:4.12'
+}
+
+
+publishing {
+    publications {
+        Production(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            groupId 'com.zjiecode'
+            artifactId this.ext.artifactId
+            version this.ext.version
+            pom.withXml {
+                //添加pom中缺失的信息，以发布到mavencenter
+                def projectNode = asNode()
+                projectNode.appendNode('name', this.ext.artifactId)
+                projectNode.appendNode('description', this.ext.description)
+                projectNode.appendNode('url', this.ext.projectUrl)
+                projectNode.appendNode('scm').appendNode("url", this.ext.projectUrl)
+                def license = projectNode.appendNode('licenses').appendNode("license")
+                license.appendNode('name', "MIT")
+                license.appendNode('url', "https://mit-license.org/")
+                def developer = projectNode.appendNode("developers").appendNode("developer")
+                developer.appendNode("id", "zjiecode")
+                developer.appendNode("email", "zjiecode@qq.com")
+            }
+        }
+    }
+}
+
+
+bintray {
+    user = this.ext.user
+    key = project.hasProperty('bintrayApiKey') ? project.property('bintrayApiKey') : System.getenv('BINTRAY_API_KEY')
+    publications = ['Production']
+    pkg {
+        repo = 'maven'
+        name = this.ext.artifactId
+        userOrg = this.ext.user
+        licenses = ['MIT']
+        vcsUrl = this.ext.projectUrl
+        labels = ['wechat', 'push', 'notification', 'pushsdk']
+        publicDownloadNumbers = true
+        version {
+            desc = this.ext.description
+            vcsTag = this.ext.version
+            released  = new Date()
+            name = this.ext.version
+        }
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
