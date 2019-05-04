@@ -20,11 +20,6 @@
 
 你需要添加Jcenter库，在“build.grade”中配置：
 ```groovy
-repositories {
-    ......
-    jcenter() //这个表示使用Jcenter库
-    ......
-}
 dependencies {
     ......
     compile 'com.zjiecode:wxpusher-client:version'//使用上面的版本号
