@@ -43,8 +43,11 @@ dependencies {
 WxPusher.send("这是一个测试消息","userId");
 ```
 有没有很简单，一行代码即可。
-当然，如果你要求稍微高一些，需要定制化一些东西，也可以使用复杂一点的API：
+
+
+~~当然，如果你要求稍微高一些，需要定制化一些东西，也可以使用复杂一点的API：~~
 ```java
+//本接口即将下线，请使用上面的接口调用。
 List<String> ids = new ArrayList<>();
 ids.add("userId");//替换成你的userId,微信关注“wxpusher”可以获取你自己的id
 Map<String, MessageDataValueItem> data = new HashMap<>();
