@@ -1,3 +1,1 @@
-echo '请输入bintrayKey：'
-read bintrayKey
-./gradlew clean build bintrayUpload  -PbintrayApiKey=$bintrayKey
+./gradlew clean build bintrayUpload  -PbintrayApiKey=$BINTRAY_API_KEY
