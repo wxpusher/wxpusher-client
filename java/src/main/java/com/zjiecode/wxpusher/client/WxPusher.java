@@ -2,6 +2,7 @@ package com.zjiecode.wxpusher.client;
 
 import com.alibaba.fastjson.JSONObject;
 import com.zjiecode.wxpusher.client.model.Message;
+import com.zjiecode.wxpusher.client.model.MessageDataValueItem;
 import com.zjiecode.wxpusher.client.model.Result;
 
 import java.io.ByteArrayOutputStream;
@@ -13,7 +14,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 说明：WxPusher的客户端
@@ -51,7 +54,7 @@ public class WxPusher {
     /**
      * 发送消息
      *
-     * @param title    消息标题
+     * @param title  消息标题
      * @param msg    消息内容
      * @param url    消息附带的url，微信收到消息 ，点击以后打开这个url
      * @param userId 接收者id
@@ -64,10 +67,47 @@ public class WxPusher {
     }
 
     /**
+     * post 发送数据
+     *
+     * @param title 标题
+     * @param msg   消息
+     * @param url   链接
+     * @param uid   接收用户id
+     * @return 发送结果
+     */
+    public static Result post(String title, String msg, String url, String uid) {
+        return post(title, msg, url, new ArrayList<String>() {{
+            add(uid);
+        }});
+    }
+
+    /**
+     * post 发送数据
+     *
+     * @param title 标题
+     * @param msg   消息
+     * @param url   链接
+     * @param uids  接收用户id,多个，是一个数组
+     * @return 发送结果
+     */
+    public static Result post(String title, String msg, String url, List<String> uids) {
+        Map<String, MessageDataValueItem> data = new HashMap<>();
+        data.put("first", new MessageDataValueItem(title, "#333333"));
+        data.put("remark", new MessageDataValueItem(msg, "#333333"));
+        Message message = new Message();
+        message.setTemplate_id("post");
+        message.setData(data);
+        message.setUrl(url);
+        message.setUserIds(uids);
+        return send(message);
+    }
+
+    /**
      * 最完整的发送消息，支持设置消息颜色等。
      *
      * @param message 需要发送的消息
      * @return 返回发送结果
+     * @deprecated 因为公众号被投诉，因此下线指定模版的功能，建议使用post接口代替。后期post接口会无感迁移。
      */
     public static Result send(Message message) {
         String valid = message.valid();

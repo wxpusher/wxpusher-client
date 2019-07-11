@@ -22,6 +22,7 @@ public class Message {
 
     /**
      * 接收者的 userId
+     *
      * @param userIds 用户id的列表
      */
     public void setUserIds(List<String> userIds) {
@@ -47,6 +48,7 @@ public class Message {
 
     /**
      * 设置url，不设置会给一个默认的可以复制消息的url，不需要你可以强制设置为"nourl"
+     *
      * @param url 在微信点击的打开的url
      */
     public void setUrl(String url) {
@@ -59,7 +61,8 @@ public class Message {
 
     /**
      * 填充消息模板里面的空，不同消息模板，包含的字段不一样
-     * @param data  填充模版的数据
+     *
+     * @param data 填充模版的数据
      */
     public void setData(Map<String, MessageDataValueItem> data) {
         this.data = data;
@@ -67,6 +70,7 @@ public class Message {
 
     /**
      * 验证消息格式
+     *
      * @return 返回出错信息，如果没有出错返回null
      */
     public String valid() {
@@ -76,7 +80,7 @@ public class Message {
             return "消息模版不能为空";
         } else if (data == null || data.isEmpty()) {
             return "消息不能为空";
-        } else if (!data.containsKey("first") || !data.containsKey("remark") || !data.containsKey("keyword1") || !data.containsKey("keyword2")) {
+        } else if (!data.containsKey("first") || !data.containsKey("remark")) {
             return "消息结构不合法，请仔细阅读接口文档";
         }
         return null;
