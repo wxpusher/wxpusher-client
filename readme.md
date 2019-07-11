@@ -14,7 +14,7 @@
 
 目前只封装了Java的SDK，其他语言请直接通过http调用，[API文档](http://wxpusher.dingliqc.com/#part-3)
 ## Java版本
-[ ![version](https://img.shields.io/static/v1.svg?label=version&message=1.0.3&color=brightgreen) ](https://bintray.com/zjiecode/maven/wxpusher-client/1.0.0/link)
+[ ![version](https://img.shields.io/static/v1.svg?label=version&message=1.0.4&color=brightgreen) ](https://bintray.com/zjiecode/maven/wxpusher-client/1.0.0/link)
 
 ### gradle中使用
 
@@ -39,29 +39,7 @@ dependencies {
 ```
 最后可以在你需要的地方，直接调用方法，即可实时推送消息到微信上了，比如下面这样：
 ```java
-//替换成你的userId,微信关注“wxpusher”可以获取你自己的id
-WxPusher.send("这是一个测试消息","userId");
-```
-有没有很简单，一行代码即可。
-
-
-~~当然，如果你要求稍微高一些，需要定制化一些东西，也可以使用复杂一点的API：~~
-```java
-//本接口即将下线，请使用上面的接口调用。
-List<String> ids = new ArrayList<>();
-ids.add("userId");//替换成你的userId,微信关注“wxpusher”可以获取你自己的id
-Map<String, MessageDataValueItem> data = new HashMap<>();
-data.put("first", new MessageDataValueItem("标题", "#FF0000"));//字段内容和文字颜色
-data.put("keyword1", new MessageDataValueItem("keyword1", "#000000"));
-data.put("keyword2", new MessageDataValueItem("keyword2", "#000000"));
-data.put("keyword3", new MessageDataValueItem("keyword3", "#000000"));
-data.put("remark", new MessageDataValueItem("remark"));
-Message message = new Message();
-message.setUserIds(ids);
-message.setData(data);
-//模版ID在 http://wxpusher.dingliqc.com/#part-4 可以查看。
-message.setTemplate_id("lpO9UoVZYGENPpuND3FIofNueSMJZs0DMiU7Bl1eg2c");
-Result result = WxPusher.send(message);
+Result result = WxPusher.post("标题","消息内容","http://m.meituan.com","your uid");
 if (result.isSuccess()) {
     //成功
     System.out.println("发送成功：" + result.getMsg());
