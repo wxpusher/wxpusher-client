@@ -1,15 +1,12 @@
 package com.zjiecode.wxpusher.client;
 
-import com.zjiecode.wxpusher.client.model.Message;
-import com.zjiecode.wxpusher.client.model.MessageDataValueItem;
-import com.zjiecode.wxpusher.client.model.Result;
+import com.zjiecode.wxpusher.client.bean.Message;
+import com.zjiecode.wxpusher.client.bean.Result;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 说明：接口测试
@@ -17,33 +14,17 @@ import java.util.Map;
  * 时间：2019-05-03
  */
 public class ClientTest {
-    @Test
-    public void testGet() {
 
-        List<String> ids = new ArrayList<>();
-        ids.add("xxxx");//替换成你的userId，一定不要提交到代码里面了
-        Result result = WxPusher.send("nourl", "这个是测试消息", "nourl", ids);
-        if (result.isSuccess()) {
-            //成功
-            System.out.println("发送成功：" + result.getMsg());
-        } else {
-            //失败
-            System.out.println("发送失败：" + result.getMsg());
-        }
-    }
 
     @Test
     public void testPost() {
-//        List<String> ids = new ArrayList<>();
-//        ids.add("xxx");//替换成你的userId，一定不要提交到代码里面了
-
-        Result result = WxPusher.post("标题","消息内容","http://m.meituan.com","xxx");
-        if (result.isSuccess()) {
-            //成功
-            System.out.println("发送成功：" + result.getMsg());
-        } else {
-            //失败
-            System.out.println("发送失败：" + result.getMsg());
-        }
+        Message message = new Message();
+        message.setAppToken("AT_qHT0cTQfLwYOlBV9cJj9zDSyEmspsmyM");
+        message.setContentType(Message.CONTENT_TYPE_TEXT);
+        message.setContent("测试一下，这是一个非常牛皮的事情");
+        message.setUid("c1BcpqxEbD8irqlGUh9BhOqR2BvH8yWZ");
+//        message.setUrl("http://m.baidu.com");
+        Result result = WxPusher.send(message);
+        System.out.println("结果:" + result.getMsg() + ",消息ID：" + result.getData());
     }
 }

@@ -27,7 +27,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    compile 'com.alibaba:fastjson:1.2.47'
+    compile 'com.alibaba:fastjson:1.2.60'
     testCompile 'junit:junit:4.12'
 }
 
