@@ -19,7 +19,7 @@ public final class WxPusher {
         if (result != null) {
             return result;
         }
-        return HttpUtils.post(message,"/api/send/user");
+        return HttpUtils.post(message,"/api/send/message");
     }
 
 

@@ -18,7 +18,7 @@ import java.net.URL;
  * 时间：2019-09-05
  */
 public final class HttpUtils {
-    private static final String BASE_URL = "http://wxpusher.test.zjiecode.com/";
+    private static final String BASE_URL = "http://wxpusher.test.zjiecode.com";
 
     private HttpUtils() {
     }

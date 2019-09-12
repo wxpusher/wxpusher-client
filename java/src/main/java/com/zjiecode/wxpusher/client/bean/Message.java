@@ -1,5 +1,10 @@
 package com.zjiecode.wxpusher.client.bean;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * 说明：
  * 作者：zjiecode
@@ -18,8 +23,8 @@ public class Message {
     private String appToken;
 
     //发送的目标
-    private String uid;
-    private Long topicId;
+    private Set<String> uids;
+    private Set<Long> topicIds;
 
     private Integer contentType;
 
@@ -38,20 +43,30 @@ public class Message {
         this.appToken = appToken;
     }
 
-    public String getUid() {
-        return uid;
+    public Set<String> getUids() {
+        return uids;
     }
 
     public void setUid(String uid) {
-        this.uid = uid;
-    }
-
-    public Long getTopicId() {
-        return topicId;
+        this.uids = new HashSet<>(1);
+        this.uids.add(uid);
     }
 
     public void setTopicId(Long topicId) {
-        this.topicId = topicId;
+        this.topicIds = new HashSet<>(1);
+        this.topicIds.add(topicId);
+    }
+
+    public void setUids(Set<String> uids) {
+        this.uids = uids;
+    }
+
+    public Set<Long> getTopicIds() {
+        return topicIds;
+    }
+
+    public void setTopicIds(Set<Long> topicIds) {
+        this.topicIds = topicIds;
     }
 
     public Integer getContentType() {
