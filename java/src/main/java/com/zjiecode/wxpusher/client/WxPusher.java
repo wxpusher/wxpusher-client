@@ -1,6 +1,5 @@
 package com.zjiecode.wxpusher.client;
 
-import com.sun.istack.internal.NotNull;
 import com.zjiecode.wxpusher.client.bean.Message;
 import com.zjiecode.wxpusher.client.bean.Result;
 import com.zjiecode.wxpusher.client.bean.ResultCode;
@@ -14,12 +13,12 @@ public final class WxPusher {
     private WxPusher() {
     }
 
-    public static @NotNull Result send(@NotNull Message message) {
+    public static Result send(Message message) {
         Result result = verify(message);
         if (result != null) {
             return result;
         }
-        return HttpUtils.post(message,"/api/send/message");
+        return HttpUtils.post(message, "/api/send/message");
     }
 
 

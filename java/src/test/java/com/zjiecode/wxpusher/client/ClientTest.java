@@ -1,5 +1,6 @@
 package com.zjiecode.wxpusher.client;
 
+import com.alibaba.fastjson.JSONObject;
 import com.zjiecode.wxpusher.client.bean.Message;
 import com.zjiecode.wxpusher.client.bean.Result;
 
@@ -20,17 +21,15 @@ public class ClientTest {
 
     @Test
     public void testPost() {
+        long start = System.currentTimeMillis();
         Message message = new Message();
         message.setAppToken("AT_qHT0cTQfLwYOlBV9cJj9zDSyEmspsmyM");
         message.setContentType(Message.CONTENT_TYPE_TEXT);
-        message.setContent("测试一下");
-        Set<String> uids=new HashSet<>();
-        uids.add("c1BcpqxEbD8irqlGUh9BhOqR2BvH8yWZ");
-        uids.add("c1BcpqxEbD8irqlGUh9BhOqR2BvH8yWZ");
-        message.setUids(uids);
-//        message.setUid("c1BcpqxEbD8irqlGUh9BhOqR2BvH8yWZ");
-//        message.setUrl("http://m.baidu.com");
+        message.setContent("不加限制的自由是很可怕的，因为很容易让任何人滑向深渊。");
+        message.setUid("c1BcpqxEbD8irqlGUh9BhOqR2BvH8yWZ");
+        message.setUrl("http://m.baidu.com");
         Result result = WxPusher.send(message);
-        System.out.println("结果:" + result.getMsg() + ",消息ID：" + result.getData());
+        System.out.println(JSONObject.toJSONString(result));
+        System.out.println("耗时：" + (System.currentTimeMillis() - start));
     }
 }

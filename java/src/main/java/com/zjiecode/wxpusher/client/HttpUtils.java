@@ -18,13 +18,17 @@ import java.net.URL;
  * 时间：2019-09-05
  */
 public final class HttpUtils {
-    private static final String BASE_URL = "http://wxpusher.test.zjiecode.com";
+    private static final String BASE_URL = "http://wxpusher.zjiecode.com";
 
     private HttpUtils() {
     }
 
     /**
      * 发送post请求
+     *
+     * @param data 发送的数据
+     * @param path 请求后台的path
+     * @return 发送的result结果
      */
     public static Result post(Object data, String path) {
         try {
