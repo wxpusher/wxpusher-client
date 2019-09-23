@@ -1,9 +1,9 @@
 package com.zjiecode.wxpusher.client.bean;
 
-public class Result {
+public class Result<T> {
     private Integer code;
     private String msg;
-    private Object data;
+    private T data;
 
     public Result() {
     }
@@ -22,11 +22,11 @@ public class Result {
         return code == ResultCode.SUCCESS.getCode();
     }
 
-    public Object getData() {
+    public T getData() {
         return data;
     }
 
-    public void setData(Object data) {
+    public void setData(T data) {
         this.data = data;
     }
 

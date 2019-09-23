@@ -11,6 +11,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 说明：网络请求工具
@@ -59,6 +61,58 @@ public final class HttpUtils {
         } catch (Throwable e) {
             return new Result(ResultCode.UNKNOWN_ERROR, e.toString());
         }
+    }
+
+    public static Result get(String path) {
+        return get(null, path);
+    }
+
+    /**
+     * 发送get请求
+     */
+    public static Result get(Map<String, Object> data, String path) {
+        try {
+            String url = buildUrl(path);
+            String query = parseMap2Query(data);
+            if (!query.isEmpty()) {
+                url = url + "?" + query;
+            }
+            URL cUrl = new URL(url);
+            HttpURLConnection urlConnection = (HttpURLConnection) cUrl.openConnection();
+            urlConnection.setConnectTimeout(5000);
+            urlConnection.setReadTimeout(5000);
+            urlConnection.setUseCaches(false);
+            urlConnection.setRequestMethod("GET");
+            //设置请求属性
+            urlConnection.setRequestProperty("Charset", "UTF-8");
+            urlConnection.setDoOutput(true);
+            urlConnection.connect();
+            return dealConnect(urlConnection);
+        } catch (MalformedURLException e) {
+            return new Result(ResultCode.NETWORK_ERROR, e.getMessage());
+        } catch (IOException e) {
+            return new Result(ResultCode.NETWORK_ERROR, e.toString());
+        } catch (Throwable e) {
+            return new Result(ResultCode.UNKNOWN_ERROR, e.toString());
+        }
+    }
+
+    /**
+     * 把map转成query查询字符串
+     */
+    private static String parseMap2Query(Map<String, Object> data) {
+        if (data == null || data.size() <= 0) {
+            return "";
+        }
+        Set<Map.Entry<String, Object>> entries = data.entrySet();
+        StringBuilder stringBuilder = new StringBuilder();
+        for (Map.Entry<String, Object> entry : entries) {
+            if (stringBuilder.length() > 0) {
+                stringBuilder.append("&");
+            }
+            stringBuilder.append(entry.getKey()).append("=").append(entry.getValue());
+        }
+        return stringBuilder.toString();
     }
 
     /**

@@ -1,8 +1,15 @@
 package com.zjiecode.wxpusher.client;
 
+import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.TypeReference;
 import com.zjiecode.wxpusher.client.bean.Message;
+import com.zjiecode.wxpusher.client.bean.MessageResult;
 import com.zjiecode.wxpusher.client.bean.Result;
 import com.zjiecode.wxpusher.client.bean.ResultCode;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 说明：WxPusher的客户端
@@ -13,12 +20,31 @@ public final class WxPusher {
     private WxPusher() {
     }
 
-    public static Result send(Message message) {
+    /**
+     * 发送消息
+     */
+    public static Result<List<MessageResult>> send(Message message) {
         Result result = verify(message);
         if (result != null) {
             return result;
         }
-        return HttpUtils.post(message, "/api/send/message");
+        Result sendResult = HttpUtils.post(message, "/api/send/message");
+        if (sendResult.isSuccess()) {
+            //转换，方便调用
+            Object data = sendResult.getData();
+            String s = JSONObject.toJSONString(data);
+            List<MessageResult> messageResults = JSONObject.parseObject(s, new TypeReference<List<MessageResult>>() {
+            });
+            sendResult.setData(messageResults);
+        }
+        return sendResult;
+    }
+
+    /**
+     * 查询消息发送状态
+     */
+    public static Result queryMessageStatus(Long messageId) {
+        return HttpUtils.get(String.format("/api/send/query/%s", messageId));
     }
 
 
