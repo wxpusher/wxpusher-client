@@ -29,6 +29,7 @@ dependencies {
   <type>pom</type>
 </dependency>
 ```
+### 发送消息
 最后可以在你需要的地方，直接调用方法，即可实时推送消息到微信上了，比如下面这样：
 ```java
 Message message = new Message();
@@ -37,8 +38,12 @@ message.setContentType(Message.CONTENT_TYPE_TEXT);
 message.setContent("不加限制的自由是很可怕的，因为很容易让任何人滑向深渊。");
 message.setUid("c1BcpqxEbD8irqlGUh9BhOqR2BvH8yWZ");
 message.setUrl("http://wxpuser.zjiecode.com");
-Result result = WxPusher.send(message);
-
+Result<List<MessageResult>> result = WxPusher.send(message);
+```
+### 查询消息发送状态
+发送消息是异步的，你可以通过这个api查询消息发送状态
+```java
+Result result = WxPusher.queryMessageStatus(messageId);
 ```
 
 使用就是这么简单，有需要就看快来试试吧。
