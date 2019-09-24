@@ -5,7 +5,7 @@ apply plugin: 'com.jfrog.bintray'
 
 //包配置信息
 ext {
-    version = "1.0.4"
+    version = "2.0.0"
     artifactId = "wxpusher-client"
     projectUrl = "https://github.com/zjiecode/wxpusher-client.git"
     description = "微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息，详情请看：http://wxpusher.dingliqc.com/。"
@@ -27,7 +27,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    compile 'com.alibaba:fastjson:1.2.47'
+    compile 'com.alibaba:fastjson:1.2.60'
     testCompile 'junit:junit:4.12'
 }
 

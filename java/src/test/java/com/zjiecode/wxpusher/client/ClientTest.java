@@ -1,15 +1,16 @@
 package com.zjiecode.wxpusher.client;
 
-import com.zjiecode.wxpusher.client.model.Message;
-import com.zjiecode.wxpusher.client.model.MessageDataValueItem;
-import com.zjiecode.wxpusher.client.model.Result;
+import com.alibaba.fastjson.JSONObject;
+import com.zjiecode.wxpusher.client.bean.Message;
+import com.zjiecode.wxpusher.client.bean.MessageResult;
+import com.zjiecode.wxpusher.client.bean.Result;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
 /**
  * 说明：接口测试
@@ -17,33 +18,30 @@ import java.util.Map;
  * 时间：2019-05-03
  */
 public class ClientTest {
-    @Test
-    public void testGet() {
-
-        List<String> ids = new ArrayList<>();
-        ids.add("xxxx");//替换成你的userId，一定不要提交到代码里面了
-        Result result = WxPusher.send("nourl", "这个是测试消息", "nourl", ids);
-        if (result.isSuccess()) {
-            //成功
-            System.out.println("发送成功：" + result.getMsg());
-        } else {
-            //失败
-            System.out.println("发送失败：" + result.getMsg());
-        }
-    }
 
     @Test
     public void testPost() {
-//        List<String> ids = new ArrayList<>();
-//        ids.add("xxx");//替换成你的userId，一定不要提交到代码里面了
-
-        Result result = WxPusher.post("标题","消息内容","http://m.meituan.com","xxx");
-        if (result.isSuccess()) {
-            //成功
-            System.out.println("发送成功：" + result.getMsg());
-        } else {
-            //失败
-            System.out.println("发送失败：" + result.getMsg());
+        long start = System.currentTimeMillis();
+        Message message = new Message();
+        message.setAppToken("AT_RPux8jzr6GBz1hQXQerA5HNqtibnXFX7");
+        message.setContentType(Message.CONTENT_TYPE_HTML);
+        message.setContent("<a hre> afa</a> aadf<span style=\"color:red;\">加油</span>");
+        message.setUid("UID_yXQrHxtg1Qzdbf6Zox83izUXPyKG");
+        message.setUrl("http://m.baidu.com");
+        Result<List<MessageResult>> result = WxPusher.send(message);
+        List<MessageResult> data = result.getData();
+        for (int i = 0; i < data.size(); i++) {
+            String msg = WxPusher.queryMessageStatus(data.get(i).getMessageId()).getMsg();
+            System.out.println(msg);
         }
+        System.out.println("耗时：" + (System.currentTimeMillis() - start));
+    }
+
+    @Test
+    public void testQuery() {
+        long start = System.currentTimeMillis();
+        Result result = WxPusher.queryMessageStatus(9L);
+        System.out.println(JSONObject.toJSONString(result));
+        System.out.println("耗时：" + (System.currentTimeMillis() - start));
     }
 }
