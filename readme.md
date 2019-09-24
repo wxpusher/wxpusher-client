@@ -1,5 +1,5 @@
 # WxPusher
-微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息.[http://wxpusher.dingliqc.com/](http://wxpusher.dingliqc.com/)
+微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息.[http://wxpusher.zjiecode.com/admin](http://wxpusher.zjiecode.com/admin)
 
 # 使用说明
 
