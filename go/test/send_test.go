@@ -1,7 +1,7 @@
 package test
 
 import (
-	"github.com/zjiecode/wxpusher-client/go/wxpusher"
+	"github.com/tmaize/wxpusher-client/go/wxpusher"
 	"testing"
 )
 
