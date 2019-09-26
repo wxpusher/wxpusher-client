@@ -1,3 +1,3 @@
-module github.com/tmaize/wxpusher-client/go
+module github.com/zjiecode/wxpusher-client/go
 
 go 1.12
