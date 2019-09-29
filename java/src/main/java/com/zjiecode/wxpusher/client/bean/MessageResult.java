@@ -11,6 +11,14 @@ public class MessageResult {
     private Integer code;
     private Long messageId;
 
+    /**
+     * 消息是否发送成功
+     * @return
+     */
+    public boolean isSuccess() {
+        return code == ResultCode.SUCCESS.getCode();
+    }
+
     public String getUid() {
         return uid;
     }

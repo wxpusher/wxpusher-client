@@ -2,14 +2,13 @@ package com.zjiecode.wxpusher.client;
 
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
+import com.zjiecode.wxpusher.client.bean.CreateQrcodeReq;
 import com.zjiecode.wxpusher.client.bean.Message;
 import com.zjiecode.wxpusher.client.bean.MessageResult;
 import com.zjiecode.wxpusher.client.bean.Result;
 import com.zjiecode.wxpusher.client.bean.ResultCode;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 说明：WxPusher的客户端
@@ -44,7 +43,17 @@ public final class WxPusher {
      * 查询消息发送状态
      */
     public static Result queryMessageStatus(Long messageId) {
+        if (messageId == null || messageId <= 0) {
+            return new Result(ResultCode.BIZ_FAIL, "messageId为空");
+        }
         return HttpUtils.get(String.format("/api/send/query/%s", messageId));
+    }
+
+    /**
+     * 创建带参数的app临时二维码
+     */
+    public static Result createAppTempQrcode(CreateQrcodeReq createQrcodeReq) {
+        return HttpUtils.post(createQrcodeReq, "/api/fun/create/qrcode");
     }
 
 

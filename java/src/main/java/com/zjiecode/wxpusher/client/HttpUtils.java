@@ -20,7 +20,8 @@ import java.util.Set;
  * 时间：2019-09-05
  */
 public final class HttpUtils {
-    private static final String BASE_URL = "http://wxpusher.zjiecode.com";
+//    private static final String BASE_URL = "http://wxpusher.zjiecode.com";
+    private static final String BASE_URL = "http://127.0.0.1:7000";
 
     private HttpUtils() {
     }
