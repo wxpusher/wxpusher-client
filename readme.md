@@ -1,5 +1,5 @@
 # WxPusher
-微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息.[http://wxpusher.dingliqc.com/](http://wxpusher.dingliqc.com/)
+微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息.[http://wxpusher.zjiecode.com/admin](http://wxpusher.zjiecode.com/admin)
 
 # 使用说明
 
@@ -47,3 +47,47 @@ Result result = WxPusher.queryMessageStatus(messageId);
 ```
 
 使用就是这么简单，有需要就看快来试试吧。
+
+## Go版本
+
+安装
+
+```sh
+go get -u github.com/zjiecode/wxpusher-client
+```
+
+引入
+
+```go
+import "github.com/zjiecode/wxpusher-client/go/wxpusher"
+```
+
+### 发送消息
+
+链式调用
+
+```go
+appToken := "AT_xxxxxxxx"
+uId := "UID_xxxxxxxxxx"
+result, err := wxpusher.NewMessage(appToken).SetContent("文本消息").AddUId(uId).Send()
+```
+
+或者直接构造
+
+```go
+appToken := "AT_xxxxxxxx"
+uId := "UID_xxxxxxxxxx"
+result, err := wxpusher.SendMessage(wxpusher.Message{
+  AppToken:    appToken,
+  Content:     "文本消息",
+  ContentType: wxpusher.ContentText,
+  UIds:        []string{uId},
+})
+```
+
+### 查询消息发送状态
+
+```go
+messageId := 600
+result, err := wxpusher.QueryMessageStatus(messageId)
+```
