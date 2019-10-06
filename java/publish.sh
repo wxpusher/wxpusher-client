@@ -1,1 +1,0 @@
-./gradlew clean build bintrayUpload  -PbintrayApiKey=$BINTRAY_API_KEY

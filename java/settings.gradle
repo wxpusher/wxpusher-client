@@ -1,2 +1,3 @@
 rootProject.name = 'wxpusher-client'
-
+include ":demo"
+include ":sdk"
