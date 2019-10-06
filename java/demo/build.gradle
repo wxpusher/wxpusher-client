@@ -42,5 +42,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
 
     compile project(":sdk")
+//  实际开发中直接依赖jar即可
+//  compile 'com.zjiecode:wxpusher-client:xxx'
 
 }
