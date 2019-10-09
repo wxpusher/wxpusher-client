@@ -40,6 +40,20 @@ message.setUid("c1BcpqxEbD8irqlGUh9BhOqR2BvH8yWZ");
 message.setUrl("http://wxpuser.zjiecode.com");
 Result<List<MessageResult>> result = WxPusher.send(message);
 ```
+### 创建带参数的二维码
+创建一个带参数的二维码，用户扫码的时候，回调里面会携带二维码的参数.
+```java
+CreateQrcodeReq createQrcodeReq = new CreateQrcodeReq();
+createQrcodeReq.setAppToken("xxxx"); //必填，应用的appTOken
+createQrcodeReq.setExtra("parameter");//必填，携带的参数
+createQrcodeReq.setValidTime(3600);//可选，二维码有效时间，默认1800 s，最大30天，单位是s
+Result<CreateQrcodeResp> tempQrcode = WxPusher.createAppTempQrcode(createQrcodeReq);
+if (tempQrcode.isSuccess()) {
+    //创建成功
+}
+```
+
+
 ### 查询消息发送状态
 发送消息是异步的，你可以通过这个api查询消息发送状态
 ```java
