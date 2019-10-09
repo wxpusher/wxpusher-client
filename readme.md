@@ -6,7 +6,7 @@
 请直接访问官方说明文档[http://wxpusher.zjiecode.com/docs](http://wxpusher.zjiecode.com/docs)
 
 ## Java版本
-[ ![version](https://img.shields.io/static/v1.svg?label=version&message=2.0.0&color=brightgreen) ](https://bintray.com/zjiecode/maven/wxpusher-client/1.0.0/link)
+[ ![version](https://img.shields.io/static/v1.svg?label=version&message=2.1.0&color=brightgreen) ](https://bintray.com/zjiecode/maven/wxpusher-client/1.0.0/link)
 
 ### gradle中使用
 
@@ -14,7 +14,7 @@
 ```groovy
 dependencies {
     ......
-    compile 'com.zjiecode:wxpusher-client:2.0.0'//使用上面的版本号
+    compile 'com.zjiecode:wxpusher-client:2.1.0'//使用上面的版本号
     ......
 }
 ```
@@ -25,7 +25,7 @@ dependencies {
 <dependency>
   <groupId>com.zjiecode</groupId>
   <artifactId>wxpusher-client</artifactId>
-  <version>2.0.0</version>
+  <version>2.1.0</version>
   <type>pom</type>
 </dependency>
 ```
