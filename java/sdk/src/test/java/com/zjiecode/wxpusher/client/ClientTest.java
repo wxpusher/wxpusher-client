@@ -1,7 +1,9 @@
 package com.zjiecode.wxpusher.client;
 
 import com.alibaba.fastjson.JSONObject;
+import com.zjiecode.wxpusher.client.bean.Page;
 import com.zjiecode.wxpusher.client.bean.Result;
+import com.zjiecode.wxpusher.client.bean.WxUser;
 
 import org.junit.Test;
 
@@ -15,9 +17,8 @@ public class ClientTest {
 
     @Test
     public void testQuery() {
-        long start = System.currentTimeMillis();
-        Result result = WxPusher.queryMessageStatus(9L);
-        System.out.println(JSONObject.toJSONString(result));
-        System.out.println("耗时：" + (System.currentTimeMillis() - start));
+        Result<Page<WxUser>> wxUsers = WxPusher.queryWxUser("AT_J6HWWp0Wbp9I3JuUC0JdlUfyOrduirJK", 1, 2);
+        wxUsers.getData().getRecords().forEach(d-> System.out.println(d.getUid()));
+        System.out.println(JSONObject.toJSONString(wxUsers));
     }
 }
