@@ -17,8 +17,8 @@ public class ClientTest {
 
     @Test
     public void testQuery() {
-        Result<Page<WxUser>> wxUsers = WxPusher.queryWxUser("AT_J6HWWp0Wbp9I3JuUC0JdlUfyOrduirJK", 1, 2);
-        wxUsers.getData().getRecords().forEach(d-> System.out.println(d.getUid()));
+        Result<Page<WxUser>> wxUsers = WxPusher.queryWxUser("AT_mNerlsGVCvwqLbS7vYo4JBfk8fEFLKgC", 1, 2);
         System.out.println(JSONObject.toJSONString(wxUsers));
+        wxUsers.getData().getRecords().forEach(d-> System.out.println(d.getUid()));
     }
 }

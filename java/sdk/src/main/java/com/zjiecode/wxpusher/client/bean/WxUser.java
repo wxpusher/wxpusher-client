@@ -16,6 +16,28 @@ public class WxUser {
     //用户关注应用的时间
     private Long createTime;
 
+    //昵称
+    private String nickName;
+
+    //头像
+    private String headImg;
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
+
     public String getUid() {
         return uid;
     }
