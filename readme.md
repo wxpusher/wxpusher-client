@@ -6,7 +6,7 @@
 请直接访问官方说明文档[http://wxpusher.zjiecode.com/docs](http://wxpusher.zjiecode.com/docs)
 
 ## Java版本
-[ ![version](https://img.shields.io/static/v1.svg?label=version&message=2.1.0&color=brightgreen) ](https://bintray.com/zjiecode/maven/wxpusher-client/1.0.0/link)
+[ ![version](https://img.shields.io/static/v1.svg?label=version&message=2.1.1&color=brightgreen) ](https://bintray.com/zjiecode/maven/wxpusher-client/1.0.0/link)
 
 ### gradle中使用
 
@@ -14,7 +14,7 @@
 ```groovy
 dependencies {
     ......
-    compile 'com.zjiecode:wxpusher-client:2.1.0'//使用上面的版本号
+    compile 'com.zjiecode:wxpusher-client:2.1.1'//使用上面的版本号
     ......
 }
 ```
@@ -58,6 +58,12 @@ if (tempQrcode.isSuccess()) {
 发送消息是异步的，你可以通过这个api查询消息发送状态
 ```java
 Result result = WxPusher.queryMessageStatus(messageId);
+```
+
+### 查询关注APP的微信用户列表
+```java
+Result<Page<WxUser>> wxUsers = WxPusher.queryWxUser("AT_xxxxx", 1, 50);
+wxUsers.getData().getRecords().forEach(d-> System.out.println(d.getUid()));
 ```
 
 使用就是这么简单，有需要就看快来试试吧。
