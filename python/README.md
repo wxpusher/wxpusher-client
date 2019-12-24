@@ -16,8 +16,10 @@ pip install -U wxpusher
 
 ```python
 from wxpusher import WxPusher
-WxPusher.send_message('content', '<uids>', '<appToken>')
-# Replace <uids> and <appToken> with the actual `uids` and `appToken`, note that `uids` should be a list.
+WxPusher.send_message('<content>', '<uids>', '<appToken>')
+WxPusher.query_message('<messageId>')
+WxPusher.create_qrcode('<extra>', '<validTime>', '<appToken>')
+WxPusher.query_user('<page>', '<page_size>', '<appToken>')
 ```
 
 ## Running the tests
@@ -53,9 +55,10 @@ nosetests
 
 - [x] Basic structure with pypi uploaded.
 - [x] Send Message.
-- [ ] Query Message.
-- [ ] Create QRCode.
-- [ ] WxUser.
+- [x] Query Message.
+- [x] Create QRCode.
+- [x] Query User.
+- [ ] More client validators.
 - [ ] Command line scripts.
 - [ ] Better documentation.
 - [ ] More robust unittest.
