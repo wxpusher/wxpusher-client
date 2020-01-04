@@ -13,4 +13,4 @@ class WxPusherException(Exception):
 
 
 class WxPusherNoneTokenException(WxPusherException):
-    """Raised when both token and default token are None"""
+    """Raised when both token and default token are None."""

@@ -1,28 +1,29 @@
-.PHONY: clean deps install lint pycodestyle pyflakes pylint test dist upload
+.PHONY: clean install dev lint pycodestyle pyflakes pylint test dist upload
 
 clean:
 	find . -name '*.pyc' -print0 | xargs -0 rm -f
 	find . -name '*.swp' -print0 | xargs -0 rm -f
 	find . -name '.DS_Store' -print0 | xargs -0 rm -rf
 	find . -name '__pycache__' -print0 | xargs -0 rm -rf
-	-rm -rf build dist *.egg-info .eggs .tox *.spec
-
-deps:
-	pip install -r requirements.txt
+	-rm -rf build dist *.egg-info
+	-rm -rf .tox .coverage
 
 install:
-	python setup.py install
+	pip install .
+
+dev:
+	pip install .[dev]
 
 lint: pycodestyle pyflakes pylint
 
 pycodestyle:
-	-pycodestyle wxpusher
+	-pycodestyle setup.py wxpusher
 
 pyflakes:
-	-pyflakes wxpusher
+	-pyflakes setup.py wxpusher
 
 pylint:
-	-pylint wxpusher
+	-pylint setup.py wxpusher
 
 test:
 	tox
