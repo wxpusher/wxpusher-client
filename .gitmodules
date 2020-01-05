@@ -1,0 +1,3 @@
+[submodule "go"]
+	path = go
+	url = https://github.com/TMaize/wxpusher-client.git

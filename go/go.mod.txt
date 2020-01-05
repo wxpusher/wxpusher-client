@@ -1,3 +1,0 @@
-module github.com/zjiecode/wxpusher-client/go
-
-go 1.12
