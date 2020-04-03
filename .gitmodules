@@ -1,0 +1,20 @@
+[submodule "wxpusher-sdk-java"]
+	path = wxpusher-sdk-java
+	url = https://github.com/wxpusher/wxpusher-sdk-java
+	branch = master
+[submodule "wxpusher-sdk-php"]
+	path = wxpusher-sdk-php
+	url = https://github.com/wxpusher/wxpusher-sdk-php
+	branch = master
+[submodule "wxpusher-sdk-python"]
+	path = wxpusher-sdk-python
+	url = https://github.com/wxpusher/wxpusher-sdk-python
+	branch = master
+[submodule "wxpusher-sdk-go"]
+	path = wxpusher-sdk-go
+	url = https://github.com/wxpusher/wxpusher-sdk-go
+	branch = master
+[submodule "wxpusher-docs"]
+	path = wxpusher-docs
+	url = https://github.com/wxpusher/wxpusher-docs
+	branch = master

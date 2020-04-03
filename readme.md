@@ -1,113 +1,53 @@
-# WxPusher
-微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息.[http://wxpusher.zjiecode.com/admin](http://wxpusher.zjiecode.com/admin)
+微信消息实时推送服务[WxPusher]，一个可以通过API实时给个人微信推送消实用服务。
 
-# 使用说明
+# 1、WxPusher
+微信消息实时推送服务[WxPusher]，可以通过API实时给个人微信推送消息，你可以点击这里使用Demo体验功能[http://wxpusher.zjiecode.com/demo](http://wxpusher.zjiecode.com/demo)。
 
-请直接访问官方说明文档[http://wxpusher.zjiecode.com/docs](http://wxpusher.zjiecode.com/docs)
+**本仓库是WxPusher所有模块的汇总，你可以在这里找到所有WxPusher相关的文档和仓库。**
 
-## Java版本
-[ ![version](https://img.shields.io/static/v1.svg?label=version&message=2.1.1&color=brightgreen) ](https://bintray.com/zjiecode/maven/wxpusher-client/1.0.0/link)
+# 2、功能和规划
+目前WxPusher已经支持的和计划支持的功能。
 
-### gradle中使用
+- [x] 消息单发（给单个人发送消息）
+- [x] 消息群发（通过Topic主题推送）
+- [x] 用户关注回调（用户关注以后回调UID）
+- [x] 创建带参数的二维码（用于识别用户来源）
+- [x] 查询消息发送状态
+- [x] 查询关注应用的用户列表
+- [ ] 添加消息摘要（较多用户反馈，内信和模版消息显示摘要即可，直接截取消息体验不好）
+- [ ] 统计和显示topic的关注用户数量
 
-你需要添加Jcenter库，在“build.grade”中配置：
-```groovy
-dependencies {
-    ......
-    compile 'com.zjiecode:wxpusher-client:2.1.1'//使用上面的版本号
-    ......
-}
-```
+# 3、平台介绍
+## 3.1、功能演示Dome 
+[http://wxpusher.zjiecode.com/demo](http://wxpusher.zjiecode.com/demo)
 
-###  在maven中使用
-在*pom.xml*文件中添加：
-```xml
-<dependency>
-  <groupId>com.zjiecode</groupId>
-  <artifactId>wxpusher-client</artifactId>
-  <version>2.1.0</version>
-  <type>pom</type>
-</dependency>
-```
-### 发送消息
-最后可以在你需要的地方，直接调用方法，即可实时推送消息到微信上了，比如下面这样：
-```java
-Message message = new Message();
-message.setAppToken("AT_qHT0cTQfLwYOlBV9cJj9zDSyEmspsmyM");
-message.setContentType(Message.CONTENT_TYPE_TEXT);
-message.setContent("不加限制的自由是很可怕的，因为很容易让任何人滑向深渊。");
-message.setUid("c1BcpqxEbD8irqlGUh9BhOqR2BvH8yWZ");
-message.setUrl("http://wxpuser.zjiecode.com");
-Result<List<MessageResult>> result = WxPusher.send(message);
-```
-### 创建带参数的二维码
-创建一个带参数的二维码，用户扫码的时候，回调里面会携带二维码的参数.
-```java
-CreateQrcodeReq createQrcodeReq = new CreateQrcodeReq();
-createQrcodeReq.setAppToken("xxxx"); //必填，应用的appTOken
-createQrcodeReq.setExtra("parameter");//必填，携带的参数
-createQrcodeReq.setValidTime(3600);//可选，二维码有效时间，默认1800 s，最大30天，单位是s
-Result<CreateQrcodeResp> tempQrcode = WxPusher.createAppTempQrcode(createQrcodeReq);
-if (tempQrcode.isSuccess()) {
-    //创建成功
-}
-```
+ 这是采用Java开发的一个demo功能，集成了WxPusher，可以用来体验一下WxPusher的功能。本Dome的源代码你可以在[这里找到](https://github.com/wxpusher/wxpusher-sdk-java)，可以了解部分开发细节。
 
+## 3.2、开发说明文档
+[http://wxpusher.zjiecode.com/docs](http://wxpusher.zjiecode.com/docs)
 
-### 查询消息发送状态
-发送消息是异步的，你可以通过这个api查询消息发送状态
-```java
-Result result = WxPusher.queryMessageStatus(messageId);
-```
+这是WxPusher的功能说明文档，包括API接口介绍，使用流程等，如果多个文档有不一致的，以这个文档为准。
 
-### 查询关注APP的微信用户列表
-```java
-Result<Page<WxUser>> wxUsers = WxPusher.queryWxUser("AT_xxxxx", 1, 50);
-wxUsers.getData().getRecords().forEach(d-> System.out.println(d.getUid()));
-```
+## 3.3、WxPusher管理后台
+[http://wxpusher.zjiecode.com/admin](http://wxpusher.zjiecode.com/admin)
 
-使用就是这么简单，有需要就看快来试试吧。
+这是WxPusher的管理中心，你可以在这里创建你的应用，主题，参看WxPusher的使用数据等。使用WxPusher，必须现在这里创建应用 ，获取appToken。
 
-## Go版本
+# 4、调用方式
+WxPusher目前的接入方式已经比家里完善了，你可以选择下面任意一种方式接入，各种SDK可能更新不够及时，以[接口说明文档](http://wxpusher.zjiecode.com/docs/#/?id=http%e8%b0%83%e7%94%a8)的接口描述为准。也欢迎你提交PR，一起完善WxPusher。
 
-安装
+## 4.1、http接口调用
+直接通过http调用，适用范围比较广，目前支持GET、POST2种调用方式，POST方式更加完善，推荐使用POST方式调用，具体可以参考[接口说明文档](http://wxpusher.zjiecode.com/docs/#/?id=http%e8%b0%83%e7%94%a8)
 
-```sh
-go get -u github.com/zjiecode/wxpusher-client
-```
+## 4.2、Java SDK
+Java SDK是官方开发，稳定可靠，推荐使用。SDK地址在这里 [https://github.com/wxpusher/wxpusher-sdk-java](https://github.com/wxpusher/wxpusher-sdk-java)，参考说明使用。
 
-引入
+## 4.3、Go SDK
+Go SDK由 _@TMaize_ 等主要贡献，地址在这里 [https://github.com/wxpusher/wxpusher-sdk-go](https://github.com/wxpusher/wxpusher-sdk-go)，参考说明文档使用，也欢迎提交PR来完善。
 
-```go
-import "github.com/zjiecode/wxpusher-client/go/wxpusher"
-```
+## 4.4、Python SDK
+Python SDK由 _@huxuan_ 等主要贡献，地址在这里 [https://github.com/wxpusher/wxpusher-sdk-python](https://github.com/wxpusher/wxpusher-sdk-python)，参考说明文档使用，也欢迎提交PR来完善。
 
-### 发送消息
+## 4.5、PHP SDK
+PHP SDK由 _@meloncn_ 等主要贡献，地址在这里 [https://github.com/wxpusher/wxpusher-sdk-php](https://github.com/wxpusher/wxpusher-sdk-php)，参考说明文档使用，也欢迎提交PR来完善。
 
-链式调用
-
-```go
-appToken := "AT_xxxxxxxx"
-uId := "UID_xxxxxxxxxx"
-result, err := wxpusher.NewMessage(appToken).SetContent("文本消息").AddUId(uId).Send()
-```
-
-或者直接构造
-
-```go
-appToken := "AT_xxxxxxxx"
-uId := "UID_xxxxxxxxxx"
-result, err := wxpusher.SendMessage(wxpusher.Message{
-  AppToken:    appToken,
-  Content:     "文本消息",
-  ContentType: wxpusher.ContentText,
-  UIds:        []string{uId},
-})
-```
-
-### 查询消息发送状态
-
-```go
-messageId := 600
-result, err := wxpusher.QueryMessageStatus(messageId)
-```

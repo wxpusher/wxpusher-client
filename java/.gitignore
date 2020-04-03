@@ -1,5 +1,0 @@
-.gradle
-.idea
-out
-build
-demo/deploy-demo.sh
