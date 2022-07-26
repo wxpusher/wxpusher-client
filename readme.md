@@ -35,7 +35,7 @@
 这是WxPusher的管理中心，你可以在这里创建你的应用，主题，参看WxPusher的使用数据等。使用WxPusher，必须现在这里创建应用 ，获取appToken。
 
 # 4、调用方式
-WxPusher目前的接入方式已经比家里完善了，你可以选择下面任意一种方式接入，各种SDK可能更新不够及时，以[接口说明文档](http://wxpusher.zjiecode.com/docs/#/?id=http%e8%b0%83%e7%94%a8)的接口描述为准。也欢迎你提交PR，一起完善WxPusher。
+WxPusher目前的接入方式已经比较完善了，你可以选择下面任意一种方式接入，各种SDK可能更新不够及时，以[接口说明文档](http://wxpusher.zjiecode.com/docs/#/?id=http%e8%b0%83%e7%94%a8)的接口描述为准。也欢迎你提交PR，一起完善WxPusher。
 
 ## 4.1、http接口调用
 直接通过http调用，适用范围比较广，目前支持GET、POST2种调用方式，POST方式更加完善，推荐使用POST方式调用，具体可以参考[接口说明文档](http://wxpusher.zjiecode.com/docs/#/?id=http%e8%b0%83%e7%94%a8)
